@@ -148,3 +148,7 @@ class LoginPage:
             expect(self.page).not_to_have_url(before_url, timeout=5000)
             expect(self.page).to_have_url(re.compile(r".*(privacy|privacy-policy).*", re.I))
             return self.page
+
+
+
+        #git test
