@@ -14,22 +14,27 @@ def pytest_addoption(parser):
     parser.addoption(
         "--browser_name", action="store", default="chrome", help="Select browser"
     )
+    parser.addoption(
+        "--headless", action="store_true", default=False,
+        help="Run tests in headless mode"
+    )
 
 
 
 @pytest.fixture
 def browserInstance(playwright, request):
     browser_name = request.config.getoption("--browser_name")
+    headless_mode = request.config.getoption("--headless")
 
     if browser_name == "chrome":
         browser = playwright.chromium.launch(
-            headless=False,
+            headless=headless_mode,
             channel="chrome"
         )
         print("Chrome launched")
 
     elif browser_name == "firefox":
-        browser = playwright.firefox.launch(headless=False)
+        browser = playwright.firefox.launch(headless=headless_mode)
         print("Firefox launched")
 
     else:
