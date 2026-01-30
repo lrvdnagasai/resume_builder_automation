@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        allure 'allure'
-    }
-
     parameters {
         choice(name: 'browser', choices: ['chrome', 'firefox'])
         choice(name: 'TEST_SCOPE', choices: ['all', 'smoke', 'regression', 'sanity'])
@@ -43,8 +39,10 @@ pipeline {
     post {
         always {
             script {
-                allure([
+                step([
+                    $class: 'AllureReportPublisher',
                     includeProperties: false,
+                    jdk: '',
                     results: [[path: 'allure-results']]
                 ])
             }
