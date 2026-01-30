@@ -1,19 +1,17 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.env
+# Virtual environment
 venv/
-.venv/
+
+# Python cache
+__pycache__/
+.pytest_cache/
+*.pyc
 
 # Playwright
 .playwright/
-playwright-report/
 
-# Pytest
-.pytest_cache/
-reports/
+# Allure
+allure-results/
+allure-report/
 
 # IDE
 .idea/

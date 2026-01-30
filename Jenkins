@@ -1,0 +1,77 @@
+pipeline {
+    agent any
+
+    parameters {
+        choice(
+            name: 'browser',
+            choices: ['chrome', 'firefox'],
+            description: 'Select browser to run tests'
+        )
+        choice(
+            name: 'TEST_SCOPE',
+            choices: ['all', 'smoke', 'regression', 'sanity'],
+            description: 'Select test scope'
+        )
+        booleanParam(
+            name: 'HEADLESS_MODE',
+            defaultValue: true,
+            description: 'Run tests in headless mode'
+        )
+    }
+
+    environment {
+        VENV_DIR = "venv"
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Setup Python Environment') {
+            steps {
+                sh '''
+                python3 -m venv venv
+                source venv/bin/activate
+                pip install --upgrade pip
+                pip install -r requirements.txt
+                playwright install
+                '''
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh '''
+                source venv/bin/activate
+                rm -rf allure-results
+                mkdir -p allure-results
+
+                HEADLESS_FLAG=""
+                if [ "$HEADLESS_MODE" = "true" ]; then
+                  HEADLESS_FLAG="--headless"
+                fi
+
+                if [ "$TEST_SCOPE" = "all" ]; then
+                  pytest --browser_name "$browser" $HEADLESS_FLAG -v -s
+                else
+                  pytest --browser_name "$browser" -m "$TEST_SCOPE" $HEADLESS_FLAG -v -s
+                fi
+                '''
+            }
+        }
+    }
+
+    post {
+        always {
+            allure([
+                includeProperties: false,
+                jdk: '',
+                results: [[path: 'allure-results']]
+            ])
+        }
+    }
+}

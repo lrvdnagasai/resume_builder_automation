@@ -1,3 +1,4 @@
+import allure
 import pytest
 
 from conftest import browserInstance
@@ -13,7 +14,8 @@ def pytest_configure(config):
 
 
 
-
+@allure.feature("Login")
+@allure.story("Valid Login")
 @pytest.mark.smoke
 @pytest.mark.expected_result("TC01: User lands on dashboard")
 def test_login_valid_user(browserInstance, credentials):
@@ -23,7 +25,8 @@ def test_login_valid_user(browserInstance, credentials):
     login.navigate()
     login.login_valid(user["email"], user["password"])
 
-
+@allure.feature("Login")
+@allure.story("InValid email Login")
 @pytest.mark.expected_result("TC02: Email validation error shown")
 def test_login_invalid_email(browserInstance, credentials):
     user = credentials["invalid_email"]
@@ -32,7 +35,8 @@ def test_login_invalid_email(browserInstance, credentials):
     login.navigate()
     login.assert_invalid_email_format(user["email"])
 
-
+@allure.feature("Login")
+@allure.story("InValid Password Login")
 @pytest.mark.expected_result("TC03: Password error shown")
 def test_login_invalid_password(browserInstance, credentials):
     user = credentials["invalid_password"]
@@ -41,7 +45,8 @@ def test_login_invalid_password(browserInstance, credentials):
     login.navigate()
     login.assert_invalid_password(user["email"], user["password"])
 
-
+@allure.feature("Login")
+@allure.story("Blank email Login")
 @pytest.mark.expected_result("TC04: Email required validation")
 def test_login_empty_email(browserInstance, credentials):
     login = LoginPage(browserInstance)
@@ -49,7 +54,8 @@ def test_login_empty_email(browserInstance, credentials):
     login.navigate()
     login.assert_email_required()
 
-
+@allure.feature("Login")
+@allure.story("Blank password Login")
 @pytest.mark.expected_result("TC05: Password required validation")
 def test_login_empty_password(browserInstance, credentials):
     user = credentials["valid_user"]
@@ -58,21 +64,29 @@ def test_login_empty_password(browserInstance, credentials):
     login.navigate()
     login.assert_password_required(user["email"])
 
+@allure.feature("Home page")
+@allure.story("About us page navigation")
 def test_about_us_navigation(browserInstance):
     login = LoginPage(browserInstance)
     login.navigate()
     login.about_us_navigation()
 
+@allure.feature("Home page")
+@allure.story("Test Terms of service navigation")
 def test_terms_of_service_navigation(browserInstance):
     login = LoginPage(browserInstance)
     login.navigate()
     login.click_terms_of_service()
 
+@allure.feature("Home page")
+@allure.story("Test Terms of service navigation")
 def test_privacy_policy_navigation(browserInstance):
     login = LoginPage(browserInstance)
     login.navigate()
     login.click_privacy_policy()
 
+@allure.feature("Home page")
+@allure.story("Test Home page navigation")
 def test_home_page_navigation(browserInstance):
     login = LoginPage(browserInstance)
     login.navigate()

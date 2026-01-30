@@ -2,6 +2,7 @@ import time
 
 import re
 
+import allure
 from playwright.sync_api import expect
 
 from .dashboard_page import DashboardPage
@@ -34,25 +35,29 @@ class LoginPage:
         self.about_us_page_text = page.get_by_role("heading", name="Meet Resume Builder")
         self.home_page_text = page.get_by_role("heading", name="Build a Professional Resume")
 
-
+    @allure.step("Navigate to login page")
     def navigate(self):
         self.page.goto(self.URL)
 
+    @allure.step("Open Login screen")
     def open_login_form(self):
         self.sign_in_button.click()
         self.see_other_option_button.click()
         expect(self.email_input).to_be_visible()
 
+    @allure.step("Enter email")
     def submit_email(self, email: str):
         self.open_login_form()
         self.email_input.fill(email)
         self.continue_button.click()
 
+    @allure.step("Enter password")
     def submit_password(self, password: str):
         expect(self.password_input).to_be_visible()
         self.password_input.fill(password)
         self.login_button.click()
 
+    @allure.step("Login with valid credentials")
     def login_valid(self, email: str, password: str) -> DashboardPage:
         self.submit_email(email)
         expect(self.invalid_email_error).not_to_be_visible()
@@ -64,14 +69,17 @@ class LoginPage:
         dashboard.verify_upload_resume_visible()
         return dashboard
 
+    @allure.step("Login with invalid email format")
     def assert_invalid_email_format(self, email: str):
         self.submit_email(email)
         expect(self.invalid_email_error).to_be_visible()
 
+    @allure.step("Login with blank email")
     def assert_email_required(self):
         self.submit_email("")
         expect(self.email_required_error).to_be_visible()
 
+    @allure.step("Login with Invalid password")
     def assert_invalid_password(self, email: str, password: str):
         self.submit_email(email)
         expect(self.invalid_email_error).not_to_be_visible()
@@ -80,6 +88,7 @@ class LoginPage:
         self.submit_password(password)
         expect(self.invalid_password_error).to_be_visible()
 
+    @allure.step("Login with blank password")
     def assert_password_required(self, email: str):
         self.submit_email(email)
         expect(self.invalid_email_error).not_to_be_visible()
@@ -88,16 +97,19 @@ class LoginPage:
         self.submit_password("")
         expect(self.password_required_error).to_be_visible()
 
+    @allure.step("About us page navigation")
     def about_us_navigation(self):
         self.sign_in_button.click()
         self.about_us_button.click()
         expect(self.about_us_page_text).to_be_visible()
 
+    @allure.step("Home page navigation")
     def home_page_navigation(self):
         self.sign_in_button.click()
         self.pikaResume_button.click()
         expect(self.home_page_text).to_be_visible()
 
+    @allure.step("Terms of services click")
     def click_terms_of_service(self):
         self.sign_in_button.click()
 
@@ -123,6 +135,7 @@ class LoginPage:
             expect(self.page).to_have_url(re.compile(r".*(terms|terms-of-service).*", re.I))
             return self.page
 
+    @allure.step("Privacy policy click")
     def click_privacy_policy(self):
         self.sign_in_button.click()
         self.privacy_policy.click()
