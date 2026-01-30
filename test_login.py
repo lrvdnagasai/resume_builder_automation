@@ -19,7 +19,6 @@ def test_login_valid_user(browserInstance, credentials):
 @allure.feature("Login")
 @allure.story("Invalid email Login")
 @pytest.mark.smoke
-@pytest.mark.expected_result("TC02: Email validation error shown")
 def test_login_invalid_email(browserInstance, credentials):
     user = credentials["invalid_email"]
     login = LoginPage(browserInstance)
