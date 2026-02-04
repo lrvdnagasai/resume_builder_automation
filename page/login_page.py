@@ -66,7 +66,7 @@ class LoginPage:
         expect(self.invalid_password_error).not_to_be_visible()
         expect(self.password_required_error).not_to_be_visible()
         dashboard = DashboardPage(self.page)
-        dashboard.verify_upload_resume_visible()
+        dashboard.is_dashboard_loaded()
         return dashboard
 
     @allure.step("Login with invalid email format")

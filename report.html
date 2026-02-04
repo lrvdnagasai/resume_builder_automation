@@ -337,11 +337,11 @@
                     <!-- Bottom grid: four items -->
                     <div class="left-bottom-grid">
                         <div class="left-bottom-grid-item">
-                            <p>2</p>
+                            <p>1</p>
                             <span>Total</span>
                         </div>
                         <div class="left-bottom-grid-item">
-                            <p>2</p>
+                            <p>1</p>
                             <span>Passed</span>
                         </div>
                         <div class="left-bottom-grid-item">
@@ -419,7 +419,7 @@
                 ],
                 datasets: [{
                     label: 'Test Results',
-                    data: [2, 0, 0],
+                    data: [1, 0, 0],
                     backgroundColor: ['#28a745', '#dc3545', '#ffc107']
                 }]
             },
@@ -452,7 +452,7 @@
             datasets: [
                 {
                     label: 'Passed',
-                    data: [2],
+                    data: [1],
                     backgroundColor: 'rgba(40, 167, 69, 0.8)' // green
                 },
                 {
@@ -504,12 +504,12 @@
         };
         new Chart(barCtx, bar_config);
 
-        const line_labels = ["test_login_valid_user", "test_login_invalid_email"];
+        const line_labels = ["test_login_valid_user"];
         const line_data = {
             labels: line_labels,
             datasets: [{
                 label: 'Duration (seconds)',
-                data: [13.387561, 10.475971],
+                data: [13.545022],
                 fill: false,
                 borderColor: 'rgba(255, 99, 132, 1)',
                 tension: 0.3,
@@ -547,7 +547,7 @@
             line_config
         );
 
-        const testData = [{"duration": 13.387560643997858, "error_message": "", "outcome": "passed", "test_name": "test_login_valid_user", "test_suite": "test_login", "traceback": ""}, {"duration": 10.475971041996672, "error_message": "", "outcome": "passed", "test_name": "test_login_invalid_email", "test_suite": "test_login", "traceback": ""}];
+        const testData = [{"duration": 13.545022083009826, "error_message": "", "outcome": "passed", "test_name": "test_login_valid_user", "test_suite": "test_login", "traceback": ""}];
 
         const table = document.getElementById('reportTable');
 

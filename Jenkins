@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        PIKA_EMAIL = credentials('pika-login-creds').username
+        PIKA_PASSWORD = credentials('pika-login-creds').password
+    }
+
     parameters {
         choice(name: 'browser', choices: ['chrome', 'firefox'])
         choice(name: 'TEST_SCOPE', choices: ['all', 'smoke', 'regression', 'sanity'])
