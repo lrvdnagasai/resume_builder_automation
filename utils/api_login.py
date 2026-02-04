@@ -1,15 +1,18 @@
 import os
 import requests
-from dotenv import load_dotenv
-
-load_dotenv()
 
 LOGIN_URL = "https://backend.pikaresume.com/auth/email-signin"
 
 def api_login():
+    email = os.getenv("PIKA_EMAIL")
+    password = os.getenv("PIKA_PASSWORD")
+
+    assert email, "PIKA_EMAIL not set"
+    assert password, "PIKA_PASSWORD not set"
+
     payload = {
-        "email": os.getenv("PIKA_EMAIL"),
-        "password": os.getenv("PIKA_PASSWORD")
+        "email": email,
+        "password": password
     }
 
     headers = {
@@ -22,9 +25,8 @@ def api_login():
     session = requests.Session()
     response = session.post(LOGIN_URL, json=payload, headers=headers)
 
-    # Backend returns 201 on success
     assert response.status_code in (200, 201), (
-        f"API Login Failed: {response.status_code} {response.text}"
+        f"Login failed: {response.status_code} {response.text}"
     )
 
     return session.cookies
