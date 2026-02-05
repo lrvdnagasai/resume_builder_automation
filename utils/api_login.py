@@ -4,11 +4,16 @@ import requests
 LOGIN_URL = "https://backend.pikaresume.com/auth/email-signin"
 
 def api_login():
-    email = os.getenv("PIKA_EMAIL")
-    password = os.getenv("PIKA_PASSWORD")
+    email = os.environ.get("PIKA_EMAIL")
+    password = os.environ.get("PIKA_PASSWORD")
 
-    assert email, "PIKA_EMAIL not set"
-    assert password, "PIKA_PASSWORD not set"
+    if not email or not password:
+        raise RuntimeError(
+            "Environment variables PIKA_EMAIL and PIKA_PASSWORD must be set.\n"
+            "For local run use:\n"
+            "export PIKA_EMAIL='your_email'\n"
+            "export PIKA_PASSWORD='your_password'"
+        )
 
     payload = {
         "email": email,

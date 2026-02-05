@@ -1,11 +1,14 @@
 import time
 
 import allure
+import pytest
+
 from page.dashboard_page import DashboardPage
 
 
 @allure.feature("Dashboard")
 @allure.story("Dashboard page load")
+@pytest.mark.smoke
 def test_dashboard_page_load(authenticated_page):
     dashboard = DashboardPage(authenticated_page)
 
