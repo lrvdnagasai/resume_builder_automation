@@ -24,7 +24,7 @@ class LoginPage:
         self.about_us_button = page.get_by_role("button", name="About Us")
         self.terms_of_conditions = page.get_by_role("link", name="Terms of Service")
         self.privacy_policy = page.get_by_role("link", name="Privacy Policy")
-        self.pikaResume_button = page.get_by_role("button", name='Pika Resume')
+        self.pikaResume_button = page.get_by_role("button", name="Pika Resume")
 
 
         # Validation messages
@@ -106,6 +106,7 @@ class LoginPage:
     @allure.step("Home page navigation")
     def home_page_navigation(self):
         self.sign_in_button.click()
+        time.sleep(2)
         self.pikaResume_button.click()
         expect(self.home_page_text).to_be_visible()
 

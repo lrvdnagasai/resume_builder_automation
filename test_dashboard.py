@@ -20,9 +20,10 @@ def test_dashboard_page_load(authenticated_page):
 
 @allure.feature("Dashboard")
 @allure.story("Dashboard cards visibility")
+@pytest.mark.smoke
 def test_dashboard_cards_visible(authenticated_page):
     dashboard = DashboardPage(authenticated_page)
-
+    time.sleep(2)
     with allure.step("Verify From Scratch card"):
         assert dashboard.from_scratch_card.is_visible()
 
@@ -35,13 +36,14 @@ def test_dashboard_cards_visible(authenticated_page):
 
 @allure.feature("Dashboard")
 @allure.story("Sidebar menu items")
+@pytest.mark.smoke
 def test_dashboard_sidebar_items(authenticated_page):
     dashboard = DashboardPage(authenticated_page)
 
     assert dashboard.dashboard_menu.is_visible()
     assert dashboard.all_templates_menu.is_visible()
     assert dashboard.your_resumes_menu.is_visible()
-    assert dashboard.logout_menu.is_visible()
+    assert dashboard.expert_review.is_visible()
 
 
 @allure.feature("Dashboard")
