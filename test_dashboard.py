@@ -20,7 +20,7 @@ def test_dashboard_page_load(authenticated_page):
 
 @allure.feature("Dashboard")
 @allure.story("Dashboard cards visibility")
-@pytest.mark.smoke
+#@pytest.mark.smoke
 def test_dashboard_cards_visible(authenticated_page):
     dashboard = DashboardPage(authenticated_page)
     time.sleep(2)
@@ -36,7 +36,7 @@ def test_dashboard_cards_visible(authenticated_page):
 
 @allure.feature("Dashboard")
 @allure.story("Sidebar menu items")
-@pytest.mark.smoke
+#@pytest.mark.smoke
 def test_dashboard_sidebar_items(authenticated_page):
     dashboard = DashboardPage(authenticated_page)
 
