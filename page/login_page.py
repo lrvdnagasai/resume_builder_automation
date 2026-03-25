@@ -139,8 +139,6 @@ class LoginPage:
     @allure.step("Privacy policy click")
     def click_privacy_policy(self):
         self.sign_in_button.click()
-        self.privacy_policy.click()
-
         before_url = self.page.url
         context = self.page.context
 

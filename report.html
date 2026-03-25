@@ -337,11 +337,11 @@
                     <!-- Bottom grid: four items -->
                     <div class="left-bottom-grid">
                         <div class="left-bottom-grid-item">
-                            <p>3</p>
+                            <p>1</p>
                             <span>Total</span>
                         </div>
                         <div class="left-bottom-grid-item">
-                            <p>3</p>
+                            <p>1</p>
                             <span>Passed</span>
                         </div>
                         <div class="left-bottom-grid-item">
@@ -419,7 +419,7 @@
                 ],
                 datasets: [{
                     label: 'Test Results',
-                    data: [3, 0, 0],
+                    data: [1, 0, 0],
                     backgroundColor: ['#28a745', '#dc3545', '#ffc107']
                 }]
             },
@@ -448,11 +448,11 @@
         const barCtx = document.getElementById('resultBarChart');
 
         const bar_data = {
-            labels: ["test_dashboard"],
+            labels: ["test_login"],
             datasets: [
                 {
                     label: 'Passed',
-                    data: [3],
+                    data: [1],
                     backgroundColor: 'rgba(40, 167, 69, 0.8)' // green
                 },
                 {
@@ -504,12 +504,12 @@
         };
         new Chart(barCtx, bar_config);
 
-        const line_labels = ["test_dashboard_page_load", "test_dashboard_cards_visible", "test_dashboard_sidebar_items"];
+        const line_labels = ["test_login_empty_email"];
         const line_data = {
             labels: line_labels,
             datasets: [{
                 label: 'Duration (seconds)',
-                data: [5.176068, 2.039012, 0.228296],
+                data: [3.345565],
                 fill: false,
                 borderColor: 'rgba(255, 99, 132, 1)',
                 tension: 0.3,
@@ -547,7 +547,7 @@
             line_config
         );
 
-        const testData = [{"duration": 5.176067712993245, "error_message": "", "outcome": "passed", "test_name": "test_dashboard_page_load", "test_suite": "test_dashboard", "traceback": ""}, {"duration": 2.039011553002638, "error_message": "", "outcome": "passed", "test_name": "test_dashboard_cards_visible", "test_suite": "test_dashboard", "traceback": ""}, {"duration": 0.22829561799881049, "error_message": "", "outcome": "passed", "test_name": "test_dashboard_sidebar_items", "test_suite": "test_dashboard", "traceback": ""}];
+        const testData = [{"duration": 3.3455648309973185, "error_message": "", "outcome": "passed", "test_name": "test_login_empty_email", "test_suite": "test_login", "traceback": ""}];
 
         const table = document.getElementById('reportTable');
 

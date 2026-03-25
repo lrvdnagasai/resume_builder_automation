@@ -1,5 +1,5 @@
 from playwright.sync_api import Page
-
+import allure
 class DashboardPage:
     def __init__(self, page: Page):
         self.page = page
@@ -22,9 +22,9 @@ class DashboardPage:
         self.linkedin_button = page.get_by_role(
             "button", name="Auto-fill via Linkedin"
         )
-
+    @allure.step("Welcome page")
     def is_dashboard_loaded(self):
         return self.welcome_text.is_visible()
-
+    @allure.step("Click upload resume")
     def click_upload_resume(self):
         self.uploadresume_button.click()
