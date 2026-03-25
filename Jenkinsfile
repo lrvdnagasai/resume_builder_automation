@@ -5,7 +5,16 @@ pipeline {
         choice(name: 'browser', choices: ['chrome', 'firefox'])
         choice(name: 'TEST_SCOPE', choices: ['all', 'smoke', 'regression', 'sanity'])
         booleanParam(name: 'HEADLESS_MODE', defaultValue: true)
-        string(name: 'TEST_FILE', defaultValue: 'all', description: 'Test file to run')
+        choice(
+            name: 'TEST_FILE',
+            choices: [
+                'all',
+                'test_login.py',
+                'test_dashboard.py',
+                'test_referral.py'
+            ],
+            description: 'Select which test file to run'
+        )
     }
 
     stages {
