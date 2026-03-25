@@ -43,6 +43,16 @@ pipeline {
                 '''
             }
         }
+
+        stage('Debug Env') {
+    steps {
+        sh '''
+        echo "USR is: $PIKA_CREDS_USR"
+        echo "PSW length: ${#PIKA_CREDS_PSW}"
+        '''
+        }
+    }
+
     }
 
     post {
