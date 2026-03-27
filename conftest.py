@@ -1,6 +1,5 @@
 import allure
 import pytest
-
 from utils.data_reader import load_credentials
 from utils.api_login import api_login
 
@@ -28,9 +27,19 @@ def browserInstance(playwright, request):
         raise ValueError(f"Unsupported browser: {browser_name}")
 
     context = browser.new_context()
+    context.tracing.start(screenshots=True, snapshots=True, sources=True)
+
     page = context.new_page()
 
     yield page
+
+    trace_path = f"allure-results/{request.node.name}_trace.zip"
+    context.tracing.stop(path=trace_path)
+    allure.attach.file(
+        trace_path,
+        name="Playwright Trace",
+        attachment_type=allure.attachment_type.ZIP
+    )
 
     context.close()
     browser.close()
@@ -49,6 +58,7 @@ def authenticated_page(playwright, request):
         raise ValueError(f"Unsupported browser: {browser_name}")
 
     context = browser.new_context()
+    context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
     cookies = api_login()
     context.add_cookies([
@@ -65,6 +75,14 @@ def authenticated_page(playwright, request):
     page.goto("https://pikaresume.com/dashboard")
 
     yield page
+
+    trace_path = f"allure-results/{request.node.name}_trace.zip"
+    context.tracing.stop(path=trace_path)
+    allure.attach.file(
+        trace_path,
+        name="Playwright Trace",
+        attachment_type=allure.attachment_type.ZIP
+    )
 
     context.close()
     browser.close()
