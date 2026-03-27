@@ -27,13 +27,12 @@ class LoginPage:
         self.pikaResume_button = page.get_by_role("button", name="Pika Resume")
 
 
-        # Validation messages
         self.invalid_email_error = page.get_by_text("Please enter a valid email")
         self.email_required_error = page.get_by_text("Email is required")
         self.invalid_password_error = page.get_by_text("Invalid password. Please try")
         self.password_required_error = page.get_by_text("Password is required*")
         self.about_us_page_text = page.get_by_role("heading", name="Meet Resume Builder")
-        self.home_page_text = page.get_by_role("heading", name="Build a Professional Resume")
+        self.home_page_text = page.get_by_text("Free lifetime access for the first ")
 
     @allure.step("Navigate to login page")
     def navigate(self):

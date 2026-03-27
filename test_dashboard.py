@@ -1,4 +1,5 @@
 import time
+from pathlib import Path
 
 import allure
 import pytest
@@ -14,7 +15,9 @@ def test_dashboard_page_load(authenticated_page):
 
     with allure.step("Verify dashboard page loaded"):
         assert dashboard.is_dashboard_loaded()
-        time.sleep(5)
+        dashboard.page.wait_for_selector("text=Welcome")
+
+        #time.sleep(5)
 
 
 
@@ -23,7 +26,7 @@ def test_dashboard_page_load(authenticated_page):
 #@pytest.mark.smoke
 def test_dashboard_cards_visible(authenticated_page):
     dashboard = DashboardPage(authenticated_page)
-    time.sleep(2)
+    dashboard.from_scratch_card.wait_for(state="visible")
     with allure.step("Verify From Scratch card"):
         assert dashboard.from_scratch_card.is_visible()
 
@@ -51,11 +54,14 @@ def test_dashboard_sidebar_items(authenticated_page):
 def test_upload_resume_click(authenticated_page):
     dashboard = DashboardPage(authenticated_page)
 
-    with allure.step("Click Upload Resume"):
-        dashboard.click_upload_resume()
+    file_path = Path(__file__).parent / "test_data" / "Nagasai__Resume-1.pdf"
 
-    with allure.step("Verify file upload input visible"):
-        assert authenticated_page.locator("input[type='file']").is_visible()
+    with allure.step("Click Upload Resume and select file"):
+        dashboard.upload_resume_file(str(file_path))
+        time.sleep(5)
+
+    with allure.step("Verify Pika Extract processing screen appears"):
+        assert dashboard.is_file_uploaded_successfully(), "Pika Extract screen did not appear after upload"
 
 
 @allure.feature("Dashboard")
