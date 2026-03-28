@@ -11,17 +11,20 @@ class DashboardPage:
         self.from_scratch_card = page.get_by_text("From Scratch")
         self.upload_resume_card = page.get_by_text("Upload Resume")
         self.tailored_jd_card = page.get_by_text("Tailored with JD")
-        self.uploadresume_button =     page.locator('div.border-purple-500:has-text("Upload Resume")')
+        self.uploadresume_button = page.locator('div.border-purple-500:has-text("Upload Resume")')
         self.dashboard_menu = page.get_by_role("link", name="Dashboard")
         self.all_templates_menu = page.get_by_role("link", name="All Templates")
         self.your_resumes_menu = page.get_by_role("link", name="Your Resumes")
         self.logout_menu = page.get_by_text("Logout", exact=True)
         self.expert_review = page.get_by_role("link", name="Expert Review")
         self.pika_extract_text = page.locator("h3.text-white:has-text('Pika Extract')")
-        # Auto-fill
-        self.linkedin_button = page.get_by_role(
-            "button", name="Auto-fill via Linkedin"
-        )
+        self.linkedin_button = page.get_by_role("button", name="Auto-fill via Linkedin")
+        self.linkedin_popup_text = page.get_by_role("heading", name="From LinkedIn to Resume", exact=True)
+        self.enter_linkedin_url = page.get_by_role("textbox", name="linkedin.com/in/your.name")
+        self.convert_resume_button = page.get_by_role("button", name="Convert to Resume")
+        self.linkedin_popup_closebutton = page.get_by_label("close")
+        self.linkedin_extract_text = page.get_by_text("Extracting profile data...")
+        self.download_pdf_button = page.get_by_role("button", name="Download PDF")
     @allure.step("Welcome page")
     def is_dashboard_loaded(self):
         return self.welcome_text.is_visible()
@@ -42,3 +45,25 @@ class DashboardPage:
     def is_file_uploaded_successfully(self):
         self.pika_extract_text.wait_for(state="visible", timeout=15000)
         return self.pika_extract_text.is_visible()
+
+    @allure.step("click autofill via linkedin")
+    def click_autofill_via_linkedin(self):
+        self.linkedin_button.click()
+
+    @allure.step("click linkedin popup close button")
+    def close_button_linkedin_popup(self):
+        self.linkedin_popup_closebutton.click()
+
+    @allure.step("Fill linkedin URL")
+    def fill_linkedin_url(self):
+        self.enter_linkedin_url.fill("https://www.linkedin.com/in/nagasai-lakkoju-41628a115/")
+
+    @allure.step("click convert resume button")
+    def click_convert_resume_button(self):
+        self.convert_resume_button.click()
+
+
+    @allure.step("Verify Linkedin extract screen appears")
+    def verify_linkedin_extract_screen(self):
+        self.linkedin_extract_text.wait_for(state="visible", timeout=15000)
+        return self.linkedin_extract_text.is_visible()

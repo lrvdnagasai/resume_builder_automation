@@ -25,8 +25,6 @@ class LoginPage:
         self.terms_of_conditions = page.get_by_role("link", name="Terms of Service")
         self.privacy_policy = page.get_by_role("link", name="Privacy Policy")
         self.pikaResume_button = page.get_by_role("button", name="Pika Resume")
-
-
         self.invalid_email_error = page.get_by_text("Please enter a valid email")
         self.email_required_error = page.get_by_text("Email is required")
         self.invalid_password_error = page.get_by_text("Invalid password. Please try")

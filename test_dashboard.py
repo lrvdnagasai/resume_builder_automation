@@ -71,6 +71,20 @@ def test_autofill_linkedin(authenticated_page):
 
     assert dashboard.linkedin_button.is_visible()
 
+@allure.feature("Dashboard")
+@allure.story("autofill Linkedin popup verification")
+def test_linkedin_popup_loads(authenticated_page):
+    dashboard = DashboardPage(authenticated_page)
+    dashboard.click_autofill_via_linkedin()
+    assert dashboard.linkedin_popup_text.is_visible()
+
+
+@allure.feature("Dashboard")
+@allure.story("Linkedin popup close button")
+def test_linkedin_popup_close_button(authenticated_page):
+    dashboard = DashboardPage(authenticated_page)
+    dashboard.click_autofill_via_linkedin()
+    dashboard.close_button_linkedin_popup()
 
 @allure.feature("Dashboard")
 @allure.story("Logout")
@@ -81,3 +95,12 @@ def test_dashboard_logout(authenticated_page):
     authenticated_page.wait_for_url("**/auth**")
     assert "auth" in authenticated_page.url
 
+@allure.feature("Dashboard")
+@allure.story("Linkedin Autofill verification")
+def test_linkedin_autofill(authenticated_page):
+    dashboard = DashboardPage(authenticated_page)
+    dashboard.click_autofill_via_linkedin()
+    dashboard.fill_linkedin_url()
+    dashboard.click_convert_resume_button()
+    assert dashboard.verify_linkedin_extract_screen()
+    
