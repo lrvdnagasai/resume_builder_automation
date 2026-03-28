@@ -68,7 +68,6 @@ def test_upload_resume_click(authenticated_page):
 @allure.story("LinkedIn auto-fill option")
 def test_autofill_linkedin(authenticated_page):
     dashboard = DashboardPage(authenticated_page)
-
     assert dashboard.linkedin_button.is_visible()
 
 @allure.feature("Dashboard")
@@ -86,14 +85,6 @@ def test_linkedin_popup_close_button(authenticated_page):
     dashboard.click_autofill_via_linkedin()
     dashboard.close_button_linkedin_popup()
 
-@allure.feature("Dashboard")
-@allure.story("Logout")
-def test_dashboard_logout(authenticated_page):
-    dashboard = DashboardPage(authenticated_page)
-
-    dashboard.logout_menu.click()
-    authenticated_page.wait_for_url("**/auth**")
-    assert "auth" in authenticated_page.url
 
 @allure.feature("Dashboard")
 @allure.story("Linkedin Autofill verification")
@@ -103,4 +94,28 @@ def test_linkedin_autofill(authenticated_page):
     dashboard.fill_linkedin_url()
     dashboard.click_convert_resume_button()
     assert dashboard.verify_linkedin_extract_screen()
-    
+
+@allure.feature("Dashboard")
+@allure.story("Verify resume from scratch open a resume editor")
+def test_resume_from_scratch(authenticated_page):
+    dashboard = DashboardPage(authenticated_page)
+    dashboard.resume_from_scratch_click()
+    assert dashboard.resume_from_scratch_validation()
+
+@allure.feature("Dashboard")
+@allure.story("validate upload JD screen open")
+def test_validate_upload_jd_button(authenticated_page):
+    dashboard = DashboardPage(authenticated_page)
+    time.sleep(5)
+    dashboard.tailor_with_JD_click()
+    assert dashboard.validate_upload_jd_button()
+
+
+@allure.feature("Dashboard")
+@allure.story("Logout")
+def test_dashboard_logout(authenticated_page):
+    dashboard = DashboardPage(authenticated_page)
+
+    dashboard.logout_menu.click()
+    authenticated_page.wait_for_url("**/auth**")
+    assert "auth" in authenticated_page.url

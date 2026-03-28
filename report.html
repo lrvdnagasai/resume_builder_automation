@@ -337,11 +337,11 @@
                     <!-- Bottom grid: four items -->
                     <div class="left-bottom-grid">
                         <div class="left-bottom-grid-item">
-                            <p>1</p>
+                            <p>0</p>
                             <span>Total</span>
                         </div>
                         <div class="left-bottom-grid-item">
-                            <p>1</p>
+                            <p>0</p>
                             <span>Passed</span>
                         </div>
                         <div class="left-bottom-grid-item">
@@ -413,13 +413,13 @@
             type: 'pie',
             data: {
                 labels: [
-                    'Passed (100.0%)',
-                    'Failed (0.0%)',
-                    'Skipped (0.0%)'
+                    'Passed (0%)',
+                    'Failed (0%)',
+                    'Skipped (0%)'
                 ],
                 datasets: [{
                     label: 'Test Results',
-                    data: [1, 0, 0],
+                    data: [0, 0, 0],
                     backgroundColor: ['#28a745', '#dc3545', '#ffc107']
                 }]
             },
@@ -448,21 +448,21 @@
         const barCtx = document.getElementById('resultBarChart');
 
         const bar_data = {
-            labels: ["test_dashboard"],
+            labels: ["No Suites Found"],
             datasets: [
                 {
                     label: 'Passed',
-                    data: [1],
+                    data: [],
                     backgroundColor: 'rgba(40, 167, 69, 0.8)' // green
                 },
                 {
                     label: 'Failed',
-                    data: [0],
+                    data: [],
                     backgroundColor: 'rgba(220, 53, 69, 0.8)' // red
                 },
                 {
                     label: 'Skipped',
-                    data: [0],
+                    data: [],
                     backgroundColor: 'rgba(255, 193, 7, 0.8)' // yellow
                 }
             ]
@@ -504,12 +504,12 @@
         };
         new Chart(barCtx, bar_config);
 
-        const line_labels = ["test_linkedin_autofill"];
+        const line_labels = [];
         const line_data = {
             labels: line_labels,
             datasets: [{
                 label: 'Duration (seconds)',
-                data: [0.984788],
+                data: [],
                 fill: false,
                 borderColor: 'rgba(255, 99, 132, 1)',
                 tension: 0.3,
@@ -547,7 +547,7 @@
             line_config
         );
 
-        const testData = [{"duration": 0.9847877089923713, "error_message": "", "outcome": "passed", "test_name": "test_linkedin_autofill", "test_suite": "test_dashboard", "traceback": ""}];
+        const testData = [];
 
         const table = document.getElementById('reportTable');
 

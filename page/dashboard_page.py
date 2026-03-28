@@ -25,6 +25,8 @@ class DashboardPage:
         self.linkedin_popup_closebutton = page.get_by_label("close")
         self.linkedin_extract_text = page.get_by_text("Extracting profile data...")
         self.download_pdf_button = page.get_by_role("button", name="Download PDF")
+        self.upload_jd_button = page.get_by_role("button", name="Upload Your JD")
+
     @allure.step("Welcome page")
     def is_dashboard_loaded(self):
         return self.welcome_text.is_visible()
@@ -67,3 +69,21 @@ class DashboardPage:
     def verify_linkedin_extract_screen(self):
         self.linkedin_extract_text.wait_for(state="visible", timeout=15000)
         return self.linkedin_extract_text.is_visible()
+
+    @allure.step("from scratch click")
+    def resume_from_scratch_click(self):
+        self.from_scratch_card.click()
+
+    @allure.step("Resume editor text validation")
+    def resume_from_scratch_validation(self):
+        self.download_pdf_button.wait_for(state="visible", timeout=15000)
+        return self.download_pdf_button.is_visible()
+
+    @allure.step("Tailor with JD click")
+    def tailor_with_JD_click(self):
+        self.tailored_jd_card.click()
+
+    @allure.step("validate upload JD button")
+    def validate_upload_jd_button(self):
+        self.upload_jd_button.wait_for(state="visible", timeout=15000)
+        return self.upload_jd_button.is_visible()
