@@ -1,6 +1,5 @@
 import time
 from pathlib import Path
-
 import allure
 import pytest
 

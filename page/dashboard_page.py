@@ -1,5 +1,7 @@
 from playwright.sync_api import Page
 import allure
+
+
 class DashboardPage:
     def __init__(self, page: Page):
         self.page = page
@@ -29,6 +31,7 @@ class DashboardPage:
 
     @allure.step("Welcome page")
     def is_dashboard_loaded(self):
+        self.welcome_text.wait_for(state="visible", timeout=15000)
         return self.welcome_text.is_visible()
     @allure.step("Click upload resume")
     def click_upload_resume(self):

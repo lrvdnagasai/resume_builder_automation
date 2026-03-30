@@ -337,11 +337,11 @@
                     <!-- Bottom grid: four items -->
                     <div class="left-bottom-grid">
                         <div class="left-bottom-grid-item">
-                            <p>0</p>
+                            <p>1</p>
                             <span>Total</span>
                         </div>
                         <div class="left-bottom-grid-item">
-                            <p>0</p>
+                            <p>1</p>
                             <span>Passed</span>
                         </div>
                         <div class="left-bottom-grid-item">
@@ -413,13 +413,13 @@
             type: 'pie',
             data: {
                 labels: [
-                    'Passed (0%)',
-                    'Failed (0%)',
-                    'Skipped (0%)'
+                    'Passed (100.0%)',
+                    'Failed (0.0%)',
+                    'Skipped (0.0%)'
                 ],
                 datasets: [{
                     label: 'Test Results',
-                    data: [0, 0, 0],
+                    data: [1, 0, 0],
                     backgroundColor: ['#28a745', '#dc3545', '#ffc107']
                 }]
             },
@@ -448,21 +448,21 @@
         const barCtx = document.getElementById('resultBarChart');
 
         const bar_data = {
-            labels: ["No Suites Found"],
+            labels: ["test_landing_page"],
             datasets: [
                 {
                     label: 'Passed',
-                    data: [],
+                    data: [1],
                     backgroundColor: 'rgba(40, 167, 69, 0.8)' // green
                 },
                 {
                     label: 'Failed',
-                    data: [],
+                    data: [0],
                     backgroundColor: 'rgba(220, 53, 69, 0.8)' // red
                 },
                 {
                     label: 'Skipped',
-                    data: [],
+                    data: [0],
                     backgroundColor: 'rgba(255, 193, 7, 0.8)' // yellow
                 }
             ]
@@ -504,12 +504,12 @@
         };
         new Chart(barCtx, bar_config);
 
-        const line_labels = [];
+        const line_labels = ["test_dashboard_navigation"];
         const line_data = {
             labels: line_labels,
             datasets: [{
                 label: 'Duration (seconds)',
-                data: [],
+                data: [1.230681],
                 fill: false,
                 borderColor: 'rgba(255, 99, 132, 1)',
                 tension: 0.3,
@@ -547,7 +547,7 @@
             line_config
         );
 
-        const testData = [];
+        const testData = [{"duration": 1.2306807589920936, "error_message": "", "outcome": "passed", "test_name": "test_dashboard_navigation", "test_suite": "test_landing_page", "traceback": ""}];
 
         const table = document.getElementById('reportTable');
 

@@ -28,7 +28,6 @@ def browserInstance(playwright, request):
 
     context = browser.new_context()
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
-
     page = context.new_page()
 
     yield page
@@ -40,7 +39,6 @@ def browserInstance(playwright, request):
         name="Playwright Trace",
         attachment_type=allure.attachment_type.ZIP
     )
-
     context.close()
     browser.close()
 
@@ -83,7 +81,48 @@ def authenticated_page(playwright, request):
         name="Playwright Trace",
         attachment_type=allure.attachment_type.ZIP
     )
+    context.close()
+    browser.close()
 
+
+@pytest.fixture
+def landing_page_auth(playwright, request):
+    browser_name = request.config.getoption("--browser_name")
+    headless = request.config.getoption("--headless")
+
+    if browser_name == "chrome":
+        browser = playwright.chromium.launch(headless=headless, channel="chrome")
+    elif browser_name == "firefox":
+        browser = playwright.firefox.launch(headless=headless)
+    else:
+        raise ValueError(f"Unsupported browser: {browser_name}")
+
+    context = browser.new_context()
+    context.tracing.start(screenshots=True, snapshots=True, sources=True)
+
+    cookies = api_login()
+    context.add_cookies([
+        {
+            "name": c.name,
+            "value": c.value,
+            "domain": ".pikaresume.com",
+            "path": "/"
+        }
+        for c in cookies
+    ])
+
+    page = context.new_page()
+    page.goto("https://pikaresume.com")
+
+    yield page
+
+    trace_path = f"allure-results/{request.node.name}_trace.zip"
+    context.tracing.stop(path=trace_path)
+    allure.attach.file(
+        trace_path,
+        name="Playwright Trace",
+        attachment_type=allure.attachment_type.ZIP
+    )
     context.close()
     browser.close()
 
@@ -94,7 +133,11 @@ def pytest_runtest_makereport(item, call):
     rep = outcome.get_result()
 
     if rep.when == "call" and rep.failed:
-        page = item.funcargs.get("authenticated_page") or item.funcargs.get("browserInstance")
+        page = (
+            item.funcargs.get("authenticated_page")
+            or item.funcargs.get("browserInstance")
+            or item.funcargs.get("landing_page")
+        )
         if page:
             allure.attach(
                 page.screenshot(),
