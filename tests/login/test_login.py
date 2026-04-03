@@ -1,7 +1,7 @@
 import allure
 import pytest
 
-from page.login_page import LoginPage
+from page.login.login_page import LoginPage
 
 
 @allure.feature("Login")

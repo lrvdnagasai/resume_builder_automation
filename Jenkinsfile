@@ -8,12 +8,13 @@ pipeline {
         choice(
             name: 'TEST_FILE',
             choices: [
-                'all',
-                'test_login.py',
-                'test_dashboard.py',
-                'test_referral.py'
+                'tests/',
+                'tests/login/test_login.py',
+                'tests/dashboard/test_dashboard.py',
+                'tests/landing/test_landing_page.py',
+                'tests/referral/test_referral.py'
             ],
-            description: 'Select which test file to run'
+            description: 'Select which test directory or file to run'
         )
     }
 
@@ -34,7 +35,7 @@ pipeline {
 
                         pip install --upgrade pip
                         pip install -r requirements.txt
-                        playwright install
+                        playwright install chromium firefox
 
                         rm -rf allure-results
                         mkdir -p allure-results
@@ -48,15 +49,12 @@ pipeline {
                           HEADLESS_FLAG="--headless"
                         fi
 
-                        FILE_FLAG=""
-                        if [ -n "$TEST_FILE" ] && [ "$TEST_FILE" != "all" ]; then
-                          FILE_FLAG="$TEST_FILE"
-                        fi
+                        TARGET_PATH="$TEST_FILE"
 
                         if [ "$TEST_SCOPE" = "all" ]; then
-                          pytest --browser_name "$browser" $HEADLESS_FLAG $FILE_FLAG -v -s --alluredir=allure-results
+                          pytest "$TARGET_PATH" --browser_name "$browser" $HEADLESS_FLAG -v -s --alluredir=allure-results
                         else
-                          pytest --browser_name "$browser" -m "$TEST_SCOPE" $HEADLESS_FLAG $FILE_FLAG -v -s --alluredir=allure-results
+                          pytest "$TARGET_PATH" --browser_name "$browser" -m "$TEST_SCOPE" $HEADLESS_FLAG -v -s --alluredir=allure-results
                         fi
                     '''
                 }

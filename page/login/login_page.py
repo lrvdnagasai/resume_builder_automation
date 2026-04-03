@@ -5,7 +5,7 @@ import re
 import allure
 from playwright.sync_api import expect
 
-from .dashboard_page import DashboardPage
+from page.dashboard.dashboard_page import DashboardPage
 
 
 class LoginPage:

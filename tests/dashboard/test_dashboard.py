@@ -3,7 +3,7 @@ from pathlib import Path
 import allure
 import pytest
 
-from page.dashboard_page import DashboardPage
+from page.dashboard.dashboard_page import DashboardPage
 
 
 @allure.feature("Dashboard")
@@ -53,7 +53,7 @@ def test_dashboard_sidebar_items(authenticated_page):
 def test_upload_resume_click(authenticated_page):
     dashboard = DashboardPage(authenticated_page)
 
-    file_path = Path(__file__).parent / "test_data" / "Nagasai__Resume-1.pdf"
+    file_path = Path(__file__).parent.parent.parent / "test_data" / "Nagasai__Resume-1.pdf"
 
     with allure.step("Click Upload Resume and select file"):
         dashboard.upload_resume_file(str(file_path))

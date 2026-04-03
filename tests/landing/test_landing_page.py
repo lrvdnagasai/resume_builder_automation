@@ -1,7 +1,7 @@
 import allure
 import pytest
-from page.landing_page import LandingPage
-from page.dashboard_page import DashboardPage
+from page.landing.landing_page import LandingPage
+from page.dashboard.dashboard_page import DashboardPage
 
 
 @allure.feature("Landing Page")

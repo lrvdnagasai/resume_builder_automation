@@ -337,11 +337,11 @@
                     <!-- Bottom grid: four items -->
                     <div class="left-bottom-grid">
                         <div class="left-bottom-grid-item">
-                            <p>1</p>
+                            <p>11</p>
                             <span>Total</span>
                         </div>
                         <div class="left-bottom-grid-item">
-                            <p>1</p>
+                            <p>11</p>
                             <span>Passed</span>
                         </div>
                         <div class="left-bottom-grid-item">
@@ -419,7 +419,7 @@
                 ],
                 datasets: [{
                     label: 'Test Results',
-                    data: [1, 0, 0],
+                    data: [11, 0, 0],
                     backgroundColor: ['#28a745', '#dc3545', '#ffc107']
                 }]
             },
@@ -448,11 +448,11 @@
         const barCtx = document.getElementById('resultBarChart');
 
         const bar_data = {
-            labels: ["test_landing_page"],
+            labels: ["test_dashboard"],
             datasets: [
                 {
                     label: 'Passed',
-                    data: [1],
+                    data: [11],
                     backgroundColor: 'rgba(40, 167, 69, 0.8)' // green
                 },
                 {
@@ -504,12 +504,12 @@
         };
         new Chart(barCtx, bar_config);
 
-        const line_labels = ["test_dashboard_navigation"];
+        const line_labels = ["test_dashboard_page_load", "test_dashboard_cards_visible", "test_dashboard_sidebar_items", "test_upload_resume_click", "test_autofill_linkedin", "test_linkedin_popup_loads", "test_linkedin_popup_close_button", "test_linkedin_autofill", "test_resume_from_scratch", "test_validate_upload_jd_button", "test_dashboard_logout"];
         const line_data = {
             labels: line_labels,
             datasets: [{
                 label: 'Duration (seconds)',
-                data: [1.230681],
+                data: [0.328441, 0.470442, 0.321484, 10.873539, 0.154991, 0.411928, 0.717612, 1.000129, 1.621638, 5.693972, 1.265785],
                 fill: false,
                 borderColor: 'rgba(255, 99, 132, 1)',
                 tension: 0.3,
@@ -547,7 +547,7 @@
             line_config
         );
 
-        const testData = [{"duration": 1.2306807589920936, "error_message": "", "outcome": "passed", "test_name": "test_dashboard_navigation", "test_suite": "test_landing_page", "traceback": ""}];
+        const testData = [{"duration": 0.328440564999255, "error_message": "", "outcome": "passed", "test_name": "test_dashboard_page_load", "test_suite": "test_dashboard", "traceback": ""}, {"duration": 0.4704420480002227, "error_message": "", "outcome": "passed", "test_name": "test_dashboard_cards_visible", "test_suite": "test_dashboard", "traceback": ""}, {"duration": 0.3214837630002876, "error_message": "", "outcome": "passed", "test_name": "test_dashboard_sidebar_items", "test_suite": "test_dashboard", "traceback": ""}, {"duration": 10.873538872000609, "error_message": "", "outcome": "passed", "test_name": "test_upload_resume_click", "test_suite": "test_dashboard", "traceback": ""}, {"duration": 0.1549913490007384, "error_message": "", "outcome": "passed", "test_name": "test_autofill_linkedin", "test_suite": "test_dashboard", "traceback": ""}, {"duration": 0.4119284200005495, "error_message": "", "outcome": "passed", "test_name": "test_linkedin_popup_loads", "test_suite": "test_dashboard", "traceback": ""}, {"duration": 0.7176119499999913, "error_message": "", "outcome": "passed", "test_name": "test_linkedin_popup_close_button", "test_suite": "test_dashboard", "traceback": ""}, {"duration": 1.0001289800002269, "error_message": "", "outcome": "passed", "test_name": "test_linkedin_autofill", "test_suite": "test_dashboard", "traceback": ""}, {"duration": 1.6216383979999591, "error_message": "", "outcome": "passed", "test_name": "test_resume_from_scratch", "test_suite": "test_dashboard", "traceback": ""}, {"duration": 5.693971608000538, "error_message": "", "outcome": "passed", "test_name": "test_validate_upload_jd_button", "test_suite": "test_dashboard", "traceback": ""}, {"duration": 1.2657848469998498, "error_message": "", "outcome": "passed", "test_name": "test_dashboard_logout", "test_suite": "test_dashboard", "traceback": ""}];
 
         const table = document.getElementById('reportTable');
 
