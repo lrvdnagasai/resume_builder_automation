@@ -15,7 +15,7 @@ allure-report/
 
 # IDE
 .idea/
-.vscode/
+
 
 # OS
 .DS_Store
